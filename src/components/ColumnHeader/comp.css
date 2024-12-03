@@ -1,6 +1,6 @@
 /* Header Container */
 .header-container {
-    width: 25%;
+    width: 100%;
     display: flex; /* Flexbox for alignment */
     align-items: center; /* Aligns items vertically */
     justify-content: space-between; /* Pushes the two grouping containers to far ends */

@@ -1,0 +1,58 @@
+/* Dashboard Grid Container */
+.dashboard-grid {
+    display: grid; /* Enable grid layout */
+    grid-template-columns: repeat(5, 1fr); /* Fix to 5 equal columns */
+    gap: 10px; /* Space between columns */
+    padding: 10px;
+    width: 100%; /* Ensure grid fits within its parent container */
+    height: 100%; /* Ensure it takes up all available space */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    box-sizing: border-box; /* Ensure padding is included in width calculations */
+  }
+  
+  /* Dashboard Column */
+  .dashboard-column {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  
+  }
+  
+  /* Column Header */
+  .column-header {
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Card Styling */
+  .card {
+    margin-bottom: 15px; /* Space between cards */
+  }
+  
+  /* Responsive Design: Adjust columns for smaller screens */
+  @media (max-width: 1200px) {
+    .dashboard-grid {
+      grid-template-columns: repeat(4, 1fr); /* 4 columns for smaller screens */
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .dashboard-grid {
+      grid-template-columns: repeat(3, 1fr); /* 3 columns for tablets */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns for small tablets */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr; /* Single column for mobile screens */
+    }
+  }
+  

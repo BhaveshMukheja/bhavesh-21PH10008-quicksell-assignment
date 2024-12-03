@@ -4,16 +4,18 @@ import { ReactComponent as Low } from "../../assets/icons_FEtask/Img - Low Prior
 import { ReactComponent as Add } from "../../assets/icons_FEtask/add.svg";
 import { ReactComponent as Dots } from "../../assets/icons_FEtask/3 dot menu.svg";
 
-const ColumnHeader = () => {
+const ColumnHeader = ({title, count}) => {
   return (
     <div className="header-container">
       {/* Left Grouping Container */}
       <div className="grouping-container">
+
+        
         <span className="icon">
           <Low />
         </span>
-        <span className="title">Low</span>
-        <span className="count">2</span>
+        <span className="title">{title}</span>
+        <span className="count">{count}</span>
       </div>
 
       {/* Right Grouping Container */}
