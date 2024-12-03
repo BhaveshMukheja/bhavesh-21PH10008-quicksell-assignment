@@ -1,0 +1,148 @@
+/* Card Container */
+.card {
+    width: 350px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Header */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .card-id {
+    font-size: 14px;
+    color: #7b7b7b;
+    margin: 0;
+  }
+  
+  /* .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  } */
+
+
+  .profile-container {
+    position: relative; /* Enables positioning of the dot relative to the avatar */
+    width: 50px; /* Avatar size */
+    height: 50px;
+  }
+  
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Makes the avatar circular */
+    object-fit: cover; /* Ensures the image scales correctly */
+  }
+  
+  /* Status Dot */
+  .card-profile-avialable {
+    position: absolute;
+    width: 10px; /* Size of the dot */
+    height: 10px;
+    border-radius: 50%; /* Makes the dot circular */
+    background-color: rgb(20,181,79); /* Online status color */
+    border: 2px solid white; /* Creates a border to separate it from the avatar */
+    bottom: 5px; /* Position the dot at the bottom-right of the avatar */
+    right: 12px;
+    bottom: 7px; /* Position the dot at the bottom-right of the avatar */
+  }
+  
+  /* Offline Status */
+  .card-profile-avialable.false {
+    background-color: rgb(225,224,227); /* Gray color for offline status */
+  }
+
+
+ 
+
+  .card-title-container{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-status{
+    display: flex;
+  }
+  
+  /* Title */
+  .card-title {
+    font-size: 18px;
+    color: #1a1a1a;
+    margin: 16px 0;
+    display: flex;
+  }
+  
+  /* Footer */
+  .card-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-footer > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .status-badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: #e5e5e5;
+    border-radius: 4px;
+  }
+  
+  .card-priority {
+    background-color: none;
+    width: 24px;
+    height: 24px; 
+    border: 1px solid #e0e0e0; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: none;
+  }
+  
+  .icon {
+    font-size: 14px;
+    display: flex;
+    
+
+  }
+
+  .card-tag{
+    border: 1px solid #e0e0e0; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    gap: 4px;
+  }
+  
+  .tag-text {
+    font-size: 14px;
+    color: #7b7b7b;
+    background-color: none;
+    display: inline-flex;
+  }
+
+  .tag-dot{
+    width: 9px;
+    height:10px;
+    border-radius: 100%;
+    background-color: rgb(190,196,201);
+    display: inline-flex;
+  }
+  

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Dashboard from './pages/dashboard/page';
 
-const App = () => {
-
+const KanbanBoard = () => {
   const [tickets, setTickets] = useState(() => {
+    // Initialize state with data from localStorage if available
     const savedTickets = localStorage.getItem('tickets');
     return savedTickets ? JSON.parse(savedTickets) : [];
   });
@@ -12,6 +11,7 @@ const App = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Fetch data only if not already in localStorage
     if (tickets.length === 0) {
       setLoading(true);
       fetch('https://api.quicksell.co/v1/internal/frontend-assignment')
@@ -20,14 +20,15 @@ const App = () => {
           return response.json();
         })
         .then((data) => {
-          setTickets(data);
-          localStorage.setItem('tickets', JSON.stringify(data));
+          setTickets(data); // Update state
+          localStorage.setItem('tickets', JSON.stringify(data)); // Save to localStorage
         })
         .catch((err) => setError(err.message))
         .finally(() => setLoading(false));
     }
   }, [tickets]);
 
+  // Save to localStorage whenever tickets state changes
   useEffect(() => {
     localStorage.setItem('tickets', JSON.stringify(tickets));
   }, [tickets]);
@@ -36,25 +37,11 @@ const App = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="App">
-     <div><Dashboard tickets={tickets} setTickets={setTickets}/></div>
-     <div>
-     <h2>Kanban Board</h2>
-      {tickets.length > 0 ? (
-        tickets.map((ticket) => (
-          <div key={ticket.id} className="kanban-card">
-            <h3>{ticket.title}</h3>
-            <p>Priority: {ticket.priority}</p>
-            <p>Status: {ticket.status}</p>
-            <p>User: {ticket.user}</p>
-          </div>
-        ))
-      ) : (
-        <p>No tickets available</p>
-      )}
-     </div>
+    <div>
+      <h1>Kanban Board</h1>
+      <pre>{JSON.stringify(tickets, null, 2)}</pre>
     </div>
   );
-}
+};
 
-export default App;
+export default KanbanBoard;
