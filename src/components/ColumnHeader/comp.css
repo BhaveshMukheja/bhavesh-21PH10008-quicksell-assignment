@@ -1,0 +1,21 @@
+/* Header Container */
+.header-container {
+    width: 25%;
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Aligns items vertically */
+    justify-content: space-between; /* Pushes the two grouping containers to far ends */
+    /* padding: 10px 20px; Optional: Adds spacing */
+  }
+  
+  /* Grouping Container */
+  .grouping-container {
+    display: inline-flex; /* Inline-flex for alignment of content inside the container */
+    gap: 10px; /* Space between elements */
+    align-items: center; /* Vertically centers items inside the container */
+  }
+  
+  /* Right Grouping Container */
+  .grouping-container.right {
+    justify-content: flex-end;
+  }
+  

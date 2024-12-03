@@ -65,6 +65,8 @@ const Card = () => {
 
 
   return (
+<>
+
     <div className="card">
       <div className="card-header">
         <p className="card-id">{cardData.id}</p>
@@ -104,6 +106,7 @@ const Card = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
