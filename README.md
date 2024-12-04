@@ -1,7 +1,3 @@
-Here’s the modified and polished version of your README draft:
-
----
-
 # Quicksell Assignment
 
 This project was developed by **Bhavesh Mukheja** as part of the placement process at **IIT KGP** for Quicksell.
