@@ -87,25 +87,3 @@ The dashboard adjusts dynamically based on the selected grouping and ordering st
 
 4. **Scalability:**
    - The modular structure ensures the codebase can be easily extended to add new features or support additional grouping and ordering combinations.
-
----
-
-## Future Improvements
-
-- **Pagination:**  
-  Implement pagination for large datasets to enhance performance.
-  
-- **Drag-and-Drop Functionality:**  
-  Allow users to move cards between columns for a more interactive experience.
-
-- **Search and Filter:**  
-  Add search and filter options for easier navigation of tasks.
-
-- **Backend Integration:**  
-  Enhance the API to support direct updates and real-time synchronization.
-
----
-
-## Conclusion
-
-This project demonstrates how a well-architected frontend can efficiently manage and visualize dynamic data. With its clean code structure and focus on user experience, the application provides a robust foundation for further development.
