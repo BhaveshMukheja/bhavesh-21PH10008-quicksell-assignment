@@ -1,78 +1,78 @@
 /* Common Variables */
 :root {
-    --bg-color: #ffffff;
-    --border-color: #e0e0e0;
-    --font-color: rgb(162, 166, 167);
-    --box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1);
-    --border-radius: 5px;
-    --padding: 10px;
-    --font-size: 14px;
-  }
-  
-  /* Navbar Container */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    padding: var(--padding) 20px;
-    font-family: Arial, sans-serif;
-    font-size: var(--font-size);
-    height: 50px;
-  }
-  
-  /* Dropdown Button */
-  .dropdown-btn,
-  .grid-item select {
-    background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    padding: 5px 12px;
-    cursor: pointer;
-    font-size: var(--font-size);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1);
-  }
-  
-  .dropdown-btn:hover {
-    background-color: #eaeaea;
-  }
-  
-  .dropdown-comp {
-    display: flex;
-  }
-  
-  /* Dropdown Grid */
-  .dropdown-grid {
-    position: absolute;
-    width: 17%;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Creates 2 columns */
-    grid-gap: 10px;
-    background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    padding: 16px;
-    margin-top: 10px;
-    z-index: 1000;
-    box-shadow: var(--box-shadow);
-    align-items: center; /* Vertically centers the grid items */
-  }
-  
-  /* Grid Items */
-  .grid-item {
-    font-size: var(--font-size);
-    color: var(--font-color);
-    display: flex;
-    align-items: center; /* Aligns content vertically in the grid cell */
-    
-  }
-  
- .grid-item #grouping,  .grid-item #ordering{
-    width: 100%;
-    box-shadow: 1px 1px 0.5px rgba(0, 0, 0, 0.1);
+  --bg-color: #ffffff; /* Background color */
+  --border-color: #e0e0e0; /* Border color */
+  --font-color: rgb(162, 166, 167); /* Font color */
+  --box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1); /* Box shadow */
+  --border-radius: 5px; /* Border radius for rounded corners */
+  --padding: 10px; /* Padding */
+  --font-size: 14px; /* Font size */
+}
 
- }
+/* Navbar Container */
+.navbar {
+  display: flex; /* Flexbox for alignment */
+  justify-content: space-between; /* Space between elements */
+  align-items: center; /* Center align items vertically */
+  background-color: var(--bg-color); /* Navbar background */
+  padding: var(--padding) 20px; /* Padding on all sides */
+  font-family: Arial, sans-serif; /* Font style */
+  font-size: var(--font-size); /* Font size */
+  height: 50px; /* Fixed height */
+}
+
+/* Dropdown Button */
+.dropdown-btn,
+.grid-item select {
+  background-color: var(--bg-color); /* Background color */
+  border: 1px solid var(--border-color); /* Border */
+  border-radius: var(--border-radius); /* Rounded corners */
+  padding: 5px 12px; /* Padding */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: var(--font-size); /* Font size */
+  display: inline-flex; /* Flexbox for alignment */
+  align-items: center; /* Center align items */
+  justify-content: center; /* Center justify items */
+  gap: 10px; /* Space between items */
+  box-shadow: var(--box-shadow); /* Box shadow for depth */
+}
+
+.dropdown-btn:hover {
+  background-color: #eaeaea; /* Change background on hover */
+}
+
+.dropdown-comp {
+  display: flex; /* Display as flex for alignment */
+}
+
+/* Dropdown Grid */
+.dropdown-grid {
+  position: absolute; /* Positioned relative to parent */
+  width: 17%; /* Fixed width */
+  display: grid; /* Grid layout */
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  grid-gap: 10px; /* Space between grid items */
+  background-color: var(--bg-color); /* Background color */
+  border: 1px solid var(--border-color); /* Border */
+  border-radius: var(--border-radius); /* Rounded corners */
+  padding: 16px; /* Padding */
+  margin-top: 10px; /* Spacing from parent */
+  z-index: 1000; /* Ensure it's on top of other elements */
+  box-shadow: var(--box-shadow); /* Box shadow for depth */
+  align-items: center; /* Align grid items vertically */
+}
+
+/* Grid Items */
+.grid-item {
+  font-size: var(--font-size); /* Font size */
+  color: var(--font-color); /* Font color */
+  display: flex; /* Flexbox for alignment */
+  align-items: center; /* Center align vertically */
+}
+
+/* Styling for dropdown selects */
+.grid-item #grouping,
+.grid-item #ordering {
+  width: 100%; /* Full width */
+  box-shadow: 1px 1px 0.5px rgba(0, 0, 0, 0.1); /* Box shadow */
+}

@@ -1,9 +1,8 @@
 .dashboard-container {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column; /* Stack navbar and grid vertically */
-    background-color: rgb(244,246,250);
-    overflow: hidden; /* Prevent any unnecessary overflow */
-  }
-  
+  width: 100%;
+  min-height: 100vh; /* Ensure the container takes the full viewport height */
+  display: flex;
+  flex-direction: column; /* Stack Navbar and DashboardGrid vertically */
+  background-color: rgb(244, 246, 250); /* Light background color for the dashboard */
+  overflow: hidden; /* Prevent any unnecessary overflow */
+}
