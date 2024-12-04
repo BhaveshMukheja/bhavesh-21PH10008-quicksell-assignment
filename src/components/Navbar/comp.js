@@ -1,14 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import GroupingContext from "../../context/GroupingContext";
+import OrderingContext from "../../context/OrderingContext";
 import "./comp.css";
 
 import { ReactComponent as Display } from "../../assets/icons_FEtask/Display.svg";
 import { ReactComponent as Down } from "../../assets/icons_FEtask/down.svg";
 
 const Navbar = () => {
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false); // Toggle for main dropdown
-  const [grouping, setGrouping] = useState("status"); // State for Grouping
-  const [ordering, setOrdering] = useState("priority"); // State for Ordering
-  const dropdownRef = useRef(null); // Reference for the dropdown container
+  const { grouping, setGrouping } = useContext(GroupingContext);
+  const { ordering, setOrdering } = useContext(OrderingContext);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -18,10 +20,8 @@ const Navbar = () => {
       }
     };
 
-    // Attach event listener
     document.addEventListener("mousedown", handleClickOutside);
 
-    // Cleanup event listener
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -29,11 +29,10 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      {/* Display Dropdown */}
       <div className="navbar-section" ref={dropdownRef}>
         <button
           className="dropdown-btn"
-          onClick={() => setIsDropdownVisible(!isDropdownVisible)}
+          onClick={() => setIsDropdownVisible((prev) => !prev)}
         >
           <span className="navbar-display-icon dropdown-comp">
             <Display />
@@ -44,8 +43,8 @@ const Navbar = () => {
           </span>
         </button>
         {isDropdownVisible && (
-          <div className="dropdown-grid">
-            {/* Grid Row 1 */}
+          <div className="dropdown-grid" onClick={(e) => e.stopPropagation()}>
+            {/* Grouping */}
             <div className="grid-item">Grouping:</div>
             <div className="grid-item grid-category-dropdown">
               <select
@@ -58,7 +57,7 @@ const Navbar = () => {
                 <option value="priority">Priority</option>
               </select>
             </div>
-            {/* Grid Row 2 */}
+            {/* Ordering */}
             <div className="grid-item">Ordering:</div>
             <div className="grid-item grid-category-dropdown">
               <select
@@ -67,14 +66,12 @@ const Navbar = () => {
                 onChange={(e) => setOrdering(e.target.value)}
               >
                 <option value="priority">Priority</option>
-                <option value="status">Title</option>
+                <option value="title">Title</option>
               </select>
             </div>
           </div>
         )}
       </div>
-
-   
     </div>
   );
 };

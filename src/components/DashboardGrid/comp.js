@@ -4,30 +4,43 @@ import ColumnHeader from "../ColumnHeader/comp";
 import Card from "../Card/comp";
 import GroupingContext from "../../context/GroupingContext";
 import OrderingContext from "../../context/OrderingContext";
-import groupByUserAndSortByPriority from "../../service/makingData"; // Your synthesized data function
-
+import {
+  groupByUserAndSortByPriority,
+  groupByUserAndSortByTitle,
+  groupByPriorityAndSortByPriority,
+  groupByPriorityAndSortByTitle,
+  groupByStatusAndSortByPriority,
+  groupByStatusAndSortByTitle
+} from "../../service/makingData";
 
 const DashboardGrid = () => {
-  const [data, setData] = useState(null); // Stores grouped and sorted data
-  const [headerTitle, setHeaderTitle] = useState(null); // Stores grouped and sorted data
-  const [headerIcon, setHeaderIcon] = useState(null); // Stores grouped and sorted data
-  const { grouping } = useContext(GroupingContext); // Current grouping (e.g., "user", "priority")
-  const { ordering } = useContext(OrderingContext); // Current ordering (e.g., "priority", "title")
+  const { grouping } = useContext(GroupingContext);
+  const { ordering } = useContext(OrderingContext);
+  const [data, setData] = useState(null);
 
-  // Fetch and process data dynamically
+  // Fetch and process data dynamically based on grouping and ordering
   useEffect(() => {
     const fetchAndGroupData = async () => {
       try {
         let groupedData;
-        // Handle grouping and ordering
+
         if (grouping === "user" && ordering === "priority") {
-          groupedData = await groupByUserAndSortByPriority(); // Use the pre-defined helper
-        } 
+          groupedData = await groupByUserAndSortByPriority();
+        } else if (grouping === "user" && ordering === "title") {
+          groupedData = await groupByUserAndSortByTitle();
+        } else if (grouping === "priority" && ordering === "priority") {
+          groupedData = await groupByPriorityAndSortByPriority();
+        } else if (grouping === "priority" && ordering === "title") {
+            groupedData = await groupByPriorityAndSortByTitle();
+        } else if (grouping === "status" && ordering === "priority") {
+            groupedData = await groupByStatusAndSortByPriority();
+          } else if (grouping === "status" && ordering === "title") {
+            groupedData = await groupByStatusAndSortByTitle();
+          }
+  
 
         setData(groupedData);
-        setHeaderTitle(groupedData.userName);
-        
-
+        console.log(groupedData);
       } catch (error) {
         console.error("Error in fetching or grouping data:", error);
         setData(null);
@@ -35,20 +48,20 @@ const DashboardGrid = () => {
     };
 
     fetchAndGroupData();
-  }, [grouping, ordering]); // Re-run whenever grouping or ordering changes
+  }, [grouping, ordering]);
 
   if (!data) {
-    return <div>Loading...</div>; // Show loading state
+    return <div className="loading">Loading...</div>;
   }
 
   return (
     <div className="dashboard-grid">
-      {data.map((group, index) => (
-        <div className="dashboard-column" key={index}>
-          <ColumnHeader
-            title={group.userName}
-            count={group.tasks.length}
-          />
+      {data.map((group) => (
+        <div className="dashboard-column" key={group.priorityLevel}>
+          {/* Column Header */}
+          <ColumnHeader title={group.priorityName || group.userName || group.status} count={group.tasks.length} priority={group.priorityLevel} status={group.status}  userId={group.userId} available={group.available}/>
+
+          {/* Task Cards */}
           {group.tasks.map((task) => (
             <Card
               key={task.id}
@@ -57,8 +70,8 @@ const DashboardGrid = () => {
               priority={task.priority}
               tag={task.tag}
               userId={task.userId}
-              status = {task.status}
-              available = {group.available}
+              status={task.status}
+              available={task.available}
             />
           ))}
         </div>
@@ -66,6 +79,5 @@ const DashboardGrid = () => {
     </div>
   );
 };
-
 
 export default DashboardGrid;
