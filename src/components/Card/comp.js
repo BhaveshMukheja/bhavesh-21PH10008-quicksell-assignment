@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import GroupingContext from "../../context/GroupingContext";
 import OrderingContext from "../../context/OrderingContext";
 import "./comp.css";
@@ -7,20 +7,17 @@ import { ReactComponent as Low } from "../../assets/icons_FEtask/Img - Low Prior
 import { ReactComponent as High } from "../../assets/icons_FEtask/Img - High Priority.svg";
 import { ReactComponent as Medium } from "../../assets/icons_FEtask/Img - Medium Priority.svg";
 import { ReactComponent as UrgentColor } from "../../assets/icons_FEtask/SVG - Urgent Priority colour.svg";
-import { ReactComponent as UrgentNoColor } from "../../assets/icons_FEtask/SVG - Urgent Priority grey.svg";
 import { ReactComponent as NoPriority } from "../../assets/icons_FEtask/No-priority.svg";
-
 import { ReactComponent as Todo } from "../../assets/icons_FEtask/To-do.svg";
 import { ReactComponent as InProgress } from "../../assets/icons_FEtask/in-progress.svg";
 import { ReactComponent as Done } from "../../assets/icons_FEtask/Done.svg";
 import { ReactComponent as Cancelled } from "../../assets/icons_FEtask/Cancelled.svg";
 import { ReactComponent as Backlog } from "../../assets/icons_FEtask/Backlog.svg";
 
-const Card = ({ id, title, priority, tag = [], userId, status, available }) => {
-  const { grouping } = useContext(GroupingContext); // Current grouping (e.g., "user", "priority")
-  const { ordering } = useContext(OrderingContext); // Current ordering (e.g., "priority", "title")
+const Card = ({ id, title, priority, tag = [], userId, status, available, userName }) => {
+  const { grouping } = useContext(GroupingContext);
+  const { ordering } = useContext(OrderingContext);
 
-  // Truncate title if it exceeds 100 characters
   const truncatedTitle = title.length > 100 ? `${title.slice(0, 100)}...` : title;
 
   // Determine priority icon
@@ -35,7 +32,7 @@ const Card = ({ id, title, priority, tag = [], userId, status, available }) => {
       case 3:
         return <High />;
       case 4:
-        return <UrgentNoColor />;
+        return <UrgentColor />;
       default:
         return null;
     }
@@ -59,43 +56,76 @@ const Card = ({ id, title, priority, tag = [], userId, status, available }) => {
     }
   };
 
+  // Generate unique background color for avatar based on userName
+  const getBackgroundColor = (name) => {
+    const colors = ["#FF5733", "#33B5E5", "#FFC107", "#4CAF50", "#FF9800", "#9C27B0"];
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return colors[Math.abs(hash) % colors.length];
+  };
+
+  // Generate initials avatar with background color
+  const renderAvatar = (name) => {
+    if (name) {
+      const initials = name
+        .split(" ")
+        .map((word) => word.charAt(0))
+        .join("")
+        .toUpperCase();
+
+      return (
+        <div
+          className="initial-avatar"
+          style={{ backgroundColor: getBackgroundColor(name) }}
+        >
+          <span>{initials}</span>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="card">
-      {/* Card Header */}
       <div className="card-header">
         <p className="card-id">{id}</p>
         <div className="profile-container">
-          {/* Conditional rendering of profile picture */}
           {grouping !== "user" && (
-  <>
-    <img
-      className="profile-pic"
-      src={`https://via.placeholder.com/40?text=${userId || "?"}`}
-      alt="Profile"
-    />
-    <span
-      className={`card-profile-avialable ${
-        available ? "true" : "false"
-      }`}
-    ></span>
-  </>
-)}
+            <>
+              {userName? (
+
+renderAvatar(userName)
+                
+              ) : (
+                <img
+                className="profile-pic"
+                src={`https://via.placeholder.com/40?text=${userId || "?"}`}
+                alt="Profile"
+              />
+              )}
+              <span
+                className={`card-profile-avialable ${
+                  available ? "true" : "false"
+                }`}
+              ></span>
+            </>
+          )}
         </div>
       </div>
-
-      {/* Card Title and Status */}
       <div className="card-title-container">
-        <span className="card-status">{renderStatusIcon(status)}</span>
+        {grouping !== "status" && (
+          <span className="card-status">{renderStatusIcon(status)}</span>
+        )}
         <h3 className="card-title">{truncatedTitle}</h3>
       </div>
-
-      {/* Card Footer */}
       <div className="card-footer">
-        {/* Priority */}
-        <div className="card-priority">
-          <span className="icon">{renderPriorityIcon(priority)}</span>
-        </div>
-        {/* Tags */}
+        {grouping !== "priority" && (
+          <div className="card-priority">
+            <span className="icon">{renderPriorityIcon(priority)}</span>
+          </div>
+        )}
         <div>
           {tag.length > 0 ? (
             tag.map((tags, index) => (

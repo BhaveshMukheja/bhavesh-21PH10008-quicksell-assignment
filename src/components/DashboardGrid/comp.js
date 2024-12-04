@@ -59,7 +59,8 @@ const DashboardGrid = () => {
       {data.map((group) => (
         <div className="dashboard-column" key={group.priorityLevel}>
           {/* Column Header */}
-          <ColumnHeader title={group.priorityName || group.userName || group.status} count={group.tasks.length} priority={group.priorityLevel} status={group.status}  userId={group.userId} available={group.available}/>
+          
+          <ColumnHeader title={group.priorityName || group.userName || group.status} count={group.tasks.length} priority={group.priorityLevel} status={group.status}  userId={group.userId} available={group.available} userName={group.userName}/>
 
           {/* Task Cards */}
           {group.tasks.map((task) => (
@@ -72,6 +73,7 @@ const DashboardGrid = () => {
               userId={task.userId}
               status={task.status}
               available={task.available}
+              userName={task.userName}
             />
           ))}
         </div>

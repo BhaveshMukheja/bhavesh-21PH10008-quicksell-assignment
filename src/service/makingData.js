@@ -69,14 +69,13 @@ export const groupByUserAndSortByTitle = async () => {
 
 
 
-
   export const groupByPriorityAndSortByPriority = async () => {
     try {
       // Fetch data
       const data = await fetchData();
       if (!data) throw new Error("Failed to fetch data.");
   
-      const { tickets } = data;
+      const { tickets, users } = data;
   
       // Define priority order explicitly
       const priorityOrder = [0, 4, 3, 2, 1]; // No Priority → Urgent → High → Medium → Low
@@ -92,7 +91,15 @@ export const groupByUserAndSortByTitle = async () => {
       const groupedByPriority = priorityOrder.map((priorityLevel) => {
         const priorityTasks = tickets
           .filter((ticket) => ticket.priority === priorityLevel) // Filter tasks for this priority
-          .sort((a, b) => a.title.localeCompare(b.title)); // Sort tasks alphabetically by title
+          .map((ticket) => {
+            const user = users.find((user) => user.id === ticket.userId); // Find the user by userId
+            return {
+              ...ticket,
+              userName: user ? user.name : "Unknown", // Add userName to each ticket
+              available: user ? user.available : false, // Add available status to each ticket
+            };
+          })
+          .sort((a, b) => b.priority - a.priority); // Sort tasks by descending priority
   
         return {
           priorityLevel: priorityLevel,
@@ -109,15 +116,14 @@ export const groupByUserAndSortByTitle = async () => {
     }
   };
 
-
-
+  
   export const groupByPriorityAndSortByTitle = async () => {
     try {
       // Fetch data
       const data = await fetchData();
       if (!data) throw new Error("Failed to fetch data.");
   
-      const { tickets } = data;
+      const { tickets, users } = data;
   
       // Define priority order explicitly
       const priorityOrder = [0, 4, 3, 2, 1]; // No Priority → Urgent → High → Medium → Low
@@ -133,6 +139,14 @@ export const groupByUserAndSortByTitle = async () => {
       const groupedByPriority = priorityOrder.map((priorityLevel) => {
         const priorityTasks = tickets
           .filter((ticket) => ticket.priority === priorityLevel) // Filter tasks with this priority
+          .map((ticket) => {
+            const user = users.find((user) => user.id === ticket.userId); // Find the user by userId
+            return {
+              ...ticket,
+              userName: user ? user.name : "Unknown", // Add userName to each ticket
+              available: user ? user.available : false, // Add available status to each ticket
+            };
+          })
           .sort((a, b) => a.title.localeCompare(b.title)); // Sort tasks alphabetically by title
   
         return {
@@ -150,15 +164,14 @@ export const groupByUserAndSortByTitle = async () => {
     }
   };
 
-
-
+  
   export const groupByStatusAndSortByPriority = async () => {
     try {
       // Fetch data
       const data = await fetchData();
       if (!data) throw new Error("Failed to fetch data.");
   
-      const { tickets } = data;
+      const { tickets, users } = data;
   
       // Define status order explicitly
       const statusOrder = ["Backlog", "Todo", "In progress", "Done", "Cancelled"];
@@ -174,6 +187,14 @@ export const groupByUserAndSortByTitle = async () => {
       const groupedByStatus = statusOrder.map((status) => {
         const statusTasks = tickets
           .filter((ticket) => ticket.status === status) // Filter tasks with this status
+          .map((ticket) => {
+            const user = users.find((user) => user.id === ticket.userId); // Find the user by userId
+            return {
+              ...ticket,
+              userName: user ? user.name : "Unknown", // Add userName to each ticket
+              available: user ? user.available : false, // Add available status to each ticket
+            };
+          })
           .sort((a, b) => b.priority - a.priority); // Sort tasks by descending priority
   
         return {
@@ -191,6 +212,7 @@ export const groupByUserAndSortByTitle = async () => {
     }
   };
 
+  
 
   export const groupByStatusAndSortByTitle = async () => {
     try {
@@ -198,7 +220,7 @@ export const groupByUserAndSortByTitle = async () => {
       const data = await fetchData();
       if (!data) throw new Error("Failed to fetch data.");
   
-      const { tickets } = data;
+      const { tickets, users } = data;
   
       // Define status order explicitly
       const statusOrder = ["Backlog", "Todo", "In progress", "Done", "Cancelled"];
@@ -214,6 +236,14 @@ export const groupByUserAndSortByTitle = async () => {
       const groupedByStatus = statusOrder.map((status) => {
         const statusTasks = tickets
           .filter((ticket) => ticket.status === status) // Filter tasks with this status
+          .map((ticket) => {
+            const user = users.find((user) => user.id === ticket.userId); // Find the user by userId
+            return {
+              ...ticket,
+              userName: user ? user.name : "Unknown", // Add userName to each ticket
+              available: user ? user.available : false, // Add available status to each ticket
+            };
+          })
           .sort((a, b) => a.title.localeCompare(b.title)); // Sort tasks alphabetically by title
   
         return {
@@ -230,3 +260,4 @@ export const groupByUserAndSortByTitle = async () => {
       return null;
     }
   };
+  
